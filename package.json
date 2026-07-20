@@ -1,0 +1,26 @@
+{
+  "name": "omp-model-router",
+  "version": "0.1.0",
+  "description": "Automatic intent-based model routing extension for the omp / Pi Agent coding harness",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/router.ts",
+  "omp": {
+    "extensions": ["./src/router.ts"]
+  },
+  "pi": {
+    "extensions": ["./src/router.ts"]
+  },
+  "keywords": [
+    "omp",
+    "pi-agent",
+    "extension",
+    "model-routing",
+    "llm",
+    "automation"
+  ],
+  "peerDependencies": {
+    "@oh-my-pi/pi-coding-agent": "*",
+    "@oh-my-pi/pi-agent-core": "*"
+  }
+}

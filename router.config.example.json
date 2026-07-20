@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "tiers": {
+    "planInteractive": { "model": "@plan", "thinking": "max" },
+    "planHeadless": { "model": "@slow", "thinking": "high" },
+    "heavy": { "model": "@slow", "thinking": "high" },
+    "default": { "model": "@default", "thinking": "inherit" },
+    "trivial": { "model": "@tiny", "thinking": "low" }
+  },
+  "planFallback": { "model": "@slow", "thinking": "high" }
+}

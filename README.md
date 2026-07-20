@@ -1,4 +1,4 @@
-# omp-model-router
+# pi-dynamic-routing
 
 Automatic, intent-based model routing for the [omp](https://github.com/oh-my-pi) / Pi Agent coding harness.
 
@@ -47,7 +47,7 @@ If a role isn't configured, the router logs a warning and leaves the model untou
 Clone or add as a submodule, then point omp at it:
 
 ```bash
-git clone https://github.com/<owner>/omp-model-router ~/.omp/agent/extensions/omp-model-router
+git clone https://github.com/<owner>/pi-dynamic-routing ~/.omp/agent/extensions/pi-dynamic-routing
 ```
 
 omp auto-discovers one-level subdirectories under `~/.omp/agent/extensions/` that have an `index.ts`/`index.js` or a `package.json` manifest with an `omp.extensions` field — this repo ships exactly that. Restart your session and the router loads automatically.
@@ -55,7 +55,7 @@ omp auto-discovers one-level subdirectories under `~/.omp/agent/extensions/` tha
 Alternatively, load it explicitly for a single run:
 
 ```bash
-omp -e /path/to/omp-model-router/src/router.ts
+omp -e /path/to/pi-dynamic-routing/src/router.ts
 ```
 
 ## Configuration

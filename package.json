@@ -1,5 +1,5 @@
 {
-  "name": "omp-model-router",
+  "name": "pi-dynamic-routing",
   "version": "0.1.0",
   "description": "Automatic intent-based model routing extension for the omp / Pi Agent coding harness",
   "license": "MIT",

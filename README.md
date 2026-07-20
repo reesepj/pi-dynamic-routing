@@ -100,6 +100,41 @@ A `/route` slash command is registered:
 
 ## How it works internally
 
+```mermaid
+flowchart TD
+    A[User submits a prompt] --> B{Auto-routing enabled?}
+    B -- no --> Z[Model unchanged for this turn]
+    B -- yes --> C[Strip code blocks / inline code from the prompt]
+    C --> D{Classify intent}
+
+    D -- planning / architecture language --> E[Tier: plan]
+    D -- refactor, migration, security/infra/money,<br/>3+ files referenced --> F[Tier: heavy]
+    D -- short typo / rename / lookup --> G[Tier: trivial]
+    D -- none of the above --> H[Tier: default]
+
+    E --> I{Interactive session?}
+    I -- yes, no prior failure --> J["@plan role<br/>max thinking<br/>+ blueprint directive"]
+    I -- yes, after a plan-tier failure --> K["fallback role<br/>high thinking"]
+    I -- no / headless --> L["@slow role<br/>high thinking<br/>+ rigor directive"]
+
+    F --> M["@slow role<br/>high thinking"]
+    G --> N["@tiny role<br/>low thinking"]
+    H --> O["@default role<br/>inherited thinking"]
+
+    J --> P[setModel + setThinkingLevel for this turn]
+    K --> P
+    L --> P
+    M --> P
+    N --> P
+    O --> P
+
+    P --> Q[Status line + log record the decision]
+    Q --> R[Turn executes on the selected model]
+    R --> S{Plan-tier model<br/>errors mid-run?}
+    S -- yes --> T[Mark plan-tier failed<br/>fall back for rest of session]
+    S -- no --> U[Session continues normally]
+```
+
 The router hooks the `before_agent_start` extension event, which fires after a prompt is submitted but before the agent loop starts, and calls the extension API's `setModel()` / `setThinkingLevel()`. This applies to the **current** turn (not the next one), and stays stable across multi-step tool-using turns — verified against a live omp session before release. See [`src/router.ts`](./src/router.ts) for the full implementation; it's a single self-contained file, deliberately kept small enough to read end to end.
 
 ## License
